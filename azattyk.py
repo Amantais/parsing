@@ -25,11 +25,11 @@ def get_page_data(html):
     except:
         title = ''
     try:
-        description = soup.find('div', class_='intro m-t-md').find('p').text.strip()
+        description = soup.find('div', class_='wsw').find('p').text.strip()
     except:
         description = ''
     try:
-        date = soup.find('span', class_='date').text.strip()
+        date = soup.find('span', class_='date-time').text.strip()[:-28]
     except:
         date = ''
     data = {'title': title, 'description': description, 'date': date}
@@ -43,7 +43,7 @@ def write_csv(data):
         print(data['title'],data['description'],data['date'])
 
 def main():
-    url = 'https://www.azattyk.org/z/20111'
+    url = 'https://www.azattyk.org/news'
     all_links = get_all_links(get_html(url))
     for url in all_links:
         html = get_html(url)
